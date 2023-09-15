@@ -12,9 +12,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>
+      <body
+        className={`${inter.className} bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100`}
+      >
         <Header />
-        <div className="container mx-auto py-10">{children}</div>
+        <div className="container mx-auto py-20">{children}</div>
       </body>
     </html>
   );
