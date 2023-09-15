@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <main className="container mx-auto py-10">
+    <main>
       <h1>Main Page</h1>
     </main>
   );
