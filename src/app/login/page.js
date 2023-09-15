@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+// import { signIn } from "next-auth/react";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -79,7 +79,7 @@ export default function Login() {
           </button>
         </div>
       </form>
-      <div className="flex gap-5">
+      {/* <div className="flex gap-5">
         <button
           className="py-2 px-5 bg-sky-300 text-white rounded"
           onClick={() => {
@@ -96,7 +96,7 @@ export default function Login() {
         >
           Google
         </button>
-      </div>
+      </div> */}
       <div className="text-center py-3">
         <p>
           I'm not registered yet!
