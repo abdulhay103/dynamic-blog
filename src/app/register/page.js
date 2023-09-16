@@ -25,6 +25,9 @@ export default function Register() {
       setLoading(true);
       const config = {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(inputsValue),
       };
       const res = await fetch(`${process.env.API_URL}/register`, config);

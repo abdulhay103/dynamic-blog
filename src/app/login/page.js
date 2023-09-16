@@ -24,7 +24,13 @@ export default function Login() {
     } else if (inputsValue.password.length === 0) {
       alert("Password Required");
     } else {
-      const config = { method: "POST", body: JSON.stringify(inputsValue) };
+      const config = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inputsValue),
+      };
       const res = await fetch("api/login", config);
       const resData = await res.json();
 
