@@ -13,12 +13,12 @@ export default function Register() {
     password: "",
   });
 
-  // onChange Setup
+  // onChangeHandler Setup
   const onChangeHandler = (name, value) => {
     setInputsValue({ ...inputsValue, [name]: value });
   };
 
-  // onSubmit Setup
+  // onSubmitHandler Setup
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -30,7 +30,7 @@ export default function Register() {
         },
         body: JSON.stringify(inputsValue),
       };
-      const res = await fetch(`${process.env.API_URL}/register`, config);
+      const res = await fetch("api/register", config);
       const resData = await res.json();
       if (resData["status"] === true) {
         setLoading(false);

@@ -6,41 +6,48 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 
 export default function Login() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [inputsValue, setInputsValue] = useState({
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
+  // onChangeHandler Setup
   const onChangeHandler = (name, value) => {
     setInputsValue({ ...inputsValue, [name]: value });
   };
+
+  // onSubmitHandler Setup
   const emailAuth = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    if (inputsValue.email.length === 0) {
-      alert("Email Required");
-    } else if (inputsValue.password.length === 0) {
-      alert("Password Required");
-    } else {
-      const config = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(inputsValue),
-      };
-      const res = await fetch("api/login", config);
-      const resData = await res.json();
-
-      if (resData["status"] === true) {
-        toast.success(resData["msg"]);
-        router.replace("/dashboard");
-        setLoading(false);
+    try {
+      setLoading(true);
+      if (inputsValue.email.length === 0) {
+        alert("Email Required");
+      } else if (inputsValue.password.length === 0) {
+        alert("Password Required");
       } else {
-        toast.error(resData["msg"]);
+        const config = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(inputsValue),
+        };
+        const res = await fetch("api/login", config);
+        const resData = await res.json();
+
+        if (resData["status"] === true) {
+          toast.success(resData["msg"]);
+          router.replace("/dashboard");
+          setLoading(false);
+        } else {
+          toast.error(resData["msg"]);
+        }
       }
+    } catch (error) {
+      console.log(error.toString());
     }
   };
   return (

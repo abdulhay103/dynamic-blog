@@ -4,7 +4,6 @@ import { headers } from "next/headers";
 export async function POST(req, res) {
   const reqJSON = await req.json();
   const { user, email, password } = reqJSON;
-  const reqHeader = headers();
   return NextResponse.json({
     status: true,
     msg: "Registration success",
