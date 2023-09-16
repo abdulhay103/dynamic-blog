@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Register() {
   const router = useRouter();
@@ -20,21 +21,24 @@ export default function Register() {
   // onSubmit Setup
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    const config = {
-      method: "POST",
-      body: JSON.stringify(inputsValue),
-    };
-    const res = await fetch("/api/register", config);
-    const resData = await res.json();
-    if (resData["status"] === true) {
-      setLoading(false);
-      alert(resData["msg"]);
-      // window.location.reload();
-      router.replace("/login");
-    } else {
-      setLoading(false);
-      alert(resData["msg"]);
+    try {
+      setLoading(true);
+      const config = {
+        method: "POST",
+        body: JSON.stringify(inputsValue),
+      };
+      const res = await fetch(`${process.env.API_URL}/register`, config);
+      const resData = await res.json();
+      if (resData["status"] === true) {
+        setLoading(false);
+        toast.success(resData["msg"]);
+        router.replace("/login");
+      } else {
+        setLoading(false);
+        toast.error(resData["msg"]);
+      }
+    } catch (error) {
+      console.log(error.toString());
     }
   };
   return (

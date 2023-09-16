@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 export default function Login() {
   const [inputsValue, setInputsValue] = useState({
@@ -28,11 +29,11 @@ export default function Login() {
       const resData = await res.json();
 
       if (resData["status"] === true) {
-        alert(resData["msg"]);
+        toast.success(resData["msg"]);
         router.replace("/dashboard");
         setLoading(false);
       } else {
-        alert(resData["msg"]);
+        toast.error(resData["msg"]);
       }
     }
   };
