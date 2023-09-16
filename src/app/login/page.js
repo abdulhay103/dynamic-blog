@@ -23,20 +23,16 @@ export default function Login() {
     } else if (inputsValue.password.length === 0) {
       alert("Password Required");
     } else {
-      try {
-        const config = { method: "POST", body: JSON.stringify(inputsValue) };
-        const res = await fetch("api/login", config);
-        const json = await res.json();
+      const config = { method: "POST", body: JSON.stringify(inputsValue) };
+      const res = await fetch("api/login", config);
+      const resData = await res.json();
 
-        if (json["status"] === true) {
-          router.replace("/dashboard");
-          setLoading(false);
-        } else {
-          alert(json["msg"]);
-        }
-      } catch (error) {
-        console.error("Error:", error);
+      if (resData["status"] === true) {
+        alert(resData["msg"]);
+        router.replace("/dashboard");
         setLoading(false);
+      } else {
+        alert(resData["msg"]);
       }
     }
   };
@@ -54,7 +50,7 @@ export default function Login() {
             }}
             className="py-2 px-5 w-full my-2 rounded border text-sky-400 border-slate-400 focus:outline-none focus:ring-none focus:border-sky-400 placeholder:text-slate-400 focus:text-sky-400"
             value={inputsValue.email}
-            type="email"
+            type="text"
             placeholder="Your Email/Username"
           />
         </div>

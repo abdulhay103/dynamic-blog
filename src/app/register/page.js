@@ -30,8 +30,8 @@ export default function Register() {
     if (resData["status"] === true) {
       setLoading(false);
       alert(resData["msg"]);
-      router.replace("/login");
       // window.location.reload();
+      router.replace("/login");
     } else {
       setLoading(false);
       alert(resData["msg"]);

@@ -2,11 +2,12 @@ import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 
 export async function POST(req, res) {
+  const reqJSON = await req.json();
+  const { user, email, password } = reqJSON;
   const reqHeader = headers();
-  let token = reqHeader.get("token");
   return NextResponse.json({
     status: true,
     msg: "Registration success",
-    token: token,
+    user: user,
   });
 }
