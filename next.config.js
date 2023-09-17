@@ -4,7 +4,7 @@ const nextConfig = {
   env: {
     DB_URL: config.DB_URL,
     API_URL: config.API_URL,
-    SECRET_KEY: config.SECRET_KEY,
+    NEXTAUTH_SECRET: config.NEXTAUTH_SECRET,
     EXPAIRATION: config.EXPAIRATION,
     ISSUER: config.ISSUER,
   },

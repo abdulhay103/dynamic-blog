@@ -12,6 +12,7 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const { email, password } = inputsValue;
 
   // onChangeHandler Setup
   const onChangeHandler = (name, value) => {
@@ -23,31 +24,29 @@ export default function Login() {
     e.preventDefault();
     try {
       setLoading(true);
-      if (inputsValue.email.length === 0) {
+      if (email.length === 0) {
         alert("Email Required");
-      } else if (inputsValue.password.length === 0) {
+      } else if (password.length === 0) {
         alert("Password Required");
       } else {
-        const config = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(inputsValue),
-        };
-        const res = await fetch("api/login", config);
-        const resData = await res.json();
-
-        if (resData["status"] === true) {
-          toast.success(resData["msg"]);
-          router.replace("/dashboard");
-          setLoading(false);
+        setLoading(true);
+        const result = await signIn("credentials", {
+          email,
+          password,
+          redirect: false,
+        });
+        setLoading(false);
+        if (result.error) {
+          toast.error(result.error);
         } else {
-          toast.error(resData["msg"]);
+          toast.success("Login Successful");
+          router.replace("/dashboard");
         }
       }
     } catch (error) {
-      console.log(error.toString());
+      setLoading(false);
+      console.log(error);
+      toast.error("An error occurred. Try again.");
     }
   };
   return (
@@ -63,7 +62,7 @@ export default function Login() {
               onChangeHandler("email", e.target.value);
             }}
             className="py-2 px-5 w-full my-2 rounded border text-sky-400 border-slate-400 focus:outline-none focus:ring-none focus:border-sky-400 placeholder:text-slate-400 focus:text-sky-400"
-            value={inputsValue.email}
+            value={email}
             type="text"
             placeholder="Your Email/Username"
           />
@@ -75,7 +74,7 @@ export default function Login() {
               onChangeHandler("password", e.target.value);
             }}
             className="py-2 px-5 w-full my-2 rounded border text-sky-400 border-slate-400 focus:outline-none focus:ring-none focus:border-sky-400 placeholder:text-slate-400 focus:text-sky-400"
-            value={inputsValue.password}
+            value={password}
             type="password"
             placeholder="Your Password..."
           />
@@ -83,7 +82,7 @@ export default function Login() {
         <div className="my-5">
           <button
             className="py-2 px-6 bg-white hover:bg-sky-400 border rounded mx-auto block text-sky-500 hover:text-white font-semibold disabled:hover:bg-white disabled:hover:text-slate-300 disabled:text-slate-300"
-            disabled={loading || !inputsValue.email || !inputsValue.password}
+            disabled={loading || !email || !password}
           >
             {loading ? "Please Wait.." : "Submit"}
           </button>
