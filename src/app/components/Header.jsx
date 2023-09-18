@@ -1,6 +1,9 @@
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 export default function Header() {
+  const { data: session, status } = useSession();
+  console.log("session==>", session, "status==>", status);
   return (
     <header className=" w-full fixed bg-white border-sky-200 shadow">
       <div className="container mx-auto flex justify-between items-center">
