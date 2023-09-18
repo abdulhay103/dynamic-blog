@@ -40,13 +40,20 @@ export default function Header() {
           </Link>
         </div>
         {status === "authenticated" ? (
-          <div className=" flex gap-4">
+          <div className=" flex gap-4 items-center">
             <Link
               className=" py-2 px-4 text-sky-500 hover:text-orange-500 hover:underline transition duration-100"
               href="/dashboard"
             >
               Dashboard
             </Link>
+            {data.user.image ? (
+              <div className=" w-8 h-8 rounded-full overflow-hidden">
+                <img src={data.user.image} alt="user" />
+              </div>
+            ) : (
+              ""
+            )}
             <a
               onClick={() => {
                 signOut({ callbackUrl: "/login" });
