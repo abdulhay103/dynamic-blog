@@ -1,6 +1,10 @@
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 export default function Header() {
+  const { data, status } = useSession();
+  console.log("session Data==>", data, "status==>", status);
+
   return (
     <header className=" w-full fixed bg-white border-sky-200 shadow">
       <div className="container mx-auto flex justify-between items-center">
@@ -35,20 +39,39 @@ export default function Header() {
             Contact
           </Link>
         </div>
-        <div className=" flex gap-4">
-          <Link
-            className=" py-2 px-4 text-sky-500 hover:text-orange-500 hover:underline transition duration-100"
-            href="/login"
-          >
-            Login
-          </Link>
-          <Link
-            className=" py-2 px-4 text-sky-500 hover:text-orange-500 hover:underline transition duration-100"
-            href="/register"
-          >
-            Register
-          </Link>
-        </div>
+        {status === "authenticated" ? (
+          <div className=" flex gap-4">
+            <Link
+              className=" py-2 px-4 text-sky-500 hover:text-orange-500 hover:underline transition duration-100"
+              href="/dashboard"
+            >
+              Dashboard
+            </Link>
+            <a
+              onClick={() => {
+                signOut({ callbackUrl: "/login" });
+              }}
+              className=" cursor-pointer py-2 px-4 text-sky-500 hover:text-orange-500 hover:underline transition duration-100"
+            >
+              Logout
+            </a>
+          </div>
+        ) : (
+          <div className=" flex gap-4">
+            <Link
+              className=" py-2 px-4 text-sky-500 hover:text-orange-500 hover:underline transition duration-100"
+              href="/login"
+            >
+              Login
+            </Link>
+            <Link
+              className=" py-2 px-4 text-sky-500 hover:text-orange-500 hover:underline transition duration-100"
+              href="/register"
+            >
+              Register
+            </Link>
+          </div>
+        )}
       </div>
     </header>
   );
