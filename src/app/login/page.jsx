@@ -93,17 +93,15 @@ export default function Login() {
       <div className="flex gap-5">
         <button
           className="py-2 px-5 bg-sky-300 text-white rounded"
-          // onClick={() => {
-          //   signIn("github");
-          // }}
+          onClick={() => {
+            signIn("github", { callBackUrl });
+          }}
         >
           Github
         </button>
         <button
           className="py-2 px-5 bg-orange-500 text-white rounded"
-          // onClick={() => {
-          //   signIn("google");
-          // }}
+          onClick={() => signIn("google", { callBackUrl })}
         >
           Google
         </button>

@@ -1,4 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials";
+import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 import User from "@/models/user";
 import bcrypt from "bcrypt";
 import dbConnect from "@/utils/dbConnect";
@@ -8,6 +10,7 @@ export const authOptions = {
     strategy: "jwt",
   },
   providers: [
+    // User Email Cridential Provider setup
     CredentialsProvider({
       async authorize(credentials, req) {
         await dbConnect();
@@ -25,6 +28,18 @@ export const authOptions = {
         }
         return user;
       },
+    }),
+
+    // Github Provider setup
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+    }),
+
+    // Google Provider setup
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
