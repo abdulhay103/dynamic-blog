@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import Link from "next/link";
@@ -7,6 +7,8 @@ import toast from "react-hot-toast";
 
 export default function Login() {
   const router = useRouter();
+  const params = useSearchParams();
+  let callBackUrl = params.get("callbackUrl") || "/";
   const [loading, setLoading] = useState(false);
   const [inputsValue, setInputsValue] = useState({
     email: "",
@@ -40,7 +42,7 @@ export default function Login() {
           toast.error(result.error);
         } else {
           toast.success("Login Successful");
-          router.replace("/dashboard");
+          router.replace(callBackUrl);
         }
       }
     } catch (error) {
