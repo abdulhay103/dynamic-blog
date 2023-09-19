@@ -8,7 +8,7 @@ export default function Register() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [inputsValue, setInputsValue] = useState({
-    user: "",
+    name: "",
     email: "",
     password: "",
   });
@@ -55,9 +55,9 @@ export default function Register() {
           <input
             className="py-2 px-5 w-full my-2 rounded border text-sky-400 border-slate-400 focus:outline-none focus:ring-none focus:border-sky-400 placeholder:text-slate-400 focus:text-sky-400"
             onChange={(e) => {
-              onChangeHandler("user", e.target.value);
+              onChangeHandler("name", e.target.value);
             }}
-            value={inputsValue.user}
+            value={inputsValue.name}
             type="text"
             placeholder="User Name..."
           />
@@ -90,7 +90,7 @@ export default function Register() {
             className="py-2 px-6 bg-white hover:bg-sky-400 border rounded mx-auto block text-sky-500 hover:text-white font-semibold disabled:hover:bg-white disabled:hover:text-slate-300 disabled:text-slate-300"
             disabled={
               loading ||
-              !inputsValue.user ||
+              !inputsValue.name ||
               !inputsValue.email ||
               !inputsValue.password
             }

@@ -58,7 +58,7 @@ export default function Login() {
       </h2>
       <form className="" onSubmit={emailAuth}>
         <div className=" w-full">
-          <label className=" text-slate-500">Email/Username</label>
+          <label className=" text-slate-500">Email</label>
           <input
             onChange={(e) => {
               onChangeHandler("email", e.target.value);
@@ -66,7 +66,7 @@ export default function Login() {
             className="py-2 px-5 w-full my-2 rounded border text-sky-400 border-slate-400 focus:outline-none focus:ring-none focus:border-sky-400 placeholder:text-slate-400 focus:text-sky-400"
             value={email}
             type="text"
-            placeholder="Your Email/Username"
+            placeholder="Your Email"
           />
         </div>
         <div className=" w-full mt-3">
