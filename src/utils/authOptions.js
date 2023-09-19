@@ -42,6 +42,35 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+  callbacks: {
+    async signIn({ user }) {
+      dbConnect();
+      const { email } = user;
+      let dbUser = await User.findOne({ email });
+      if (!dbUser) {
+        dbUser = await User.create({
+          name: user.name,
+          email: user.email,
+          image: user.image,
+        });
+      }
+      return true;
+    },
+    // add aditional use info (jwt & session) on the Session
+    jwt: async ({ token, user }) => {
+      // console.log("jwt callback", token, user);
+      const userByEmail = await User.findOne({ email: token.email });
+      userByEmail.password = undefined;
+      token.user = userByEmail;
+      return token;
+    },
+
+    session: async ({ session, token }) => {
+      // console.log("session callback", session, token);
+      session.user = token.user;
+      return session;
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",
