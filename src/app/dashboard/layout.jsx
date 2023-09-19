@@ -1,11 +1,10 @@
-import { Children } from "react";
 import AdminHeader from "../components/AdminHeader";
 
-export default function AdminLayout({ Children }) {
+export default function AdminLayout({ children }) {
   return (
     <main>
       <AdminHeader />
-      {Children}
+      {children}
     </main>
   );
 }
