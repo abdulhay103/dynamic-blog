@@ -12,6 +12,7 @@ export default function Register() {
     email: "",
     password: "",
   });
+  let { name, email, password } = inputsValue;
 
   // onChangeHandler Setup
   const onChangeHandler = (name, value) => {
@@ -57,7 +58,7 @@ export default function Register() {
             onChange={(e) => {
               onChangeHandler("name", e.target.value);
             }}
-            value={inputsValue.name}
+            value={name}
             type="text"
             placeholder="User Name..."
           />
@@ -69,7 +70,7 @@ export default function Register() {
             onChange={(e) => {
               onChangeHandler("email", e.target.value);
             }}
-            value={inputsValue.email}
+            value={email}
             type="email"
             placeholder="Your Email..."
           />
@@ -81,6 +82,7 @@ export default function Register() {
             onChange={(e) => {
               onChangeHandler("password", e.target.value);
             }}
+            value={password}
             type="password"
             placeholder="Your Password..."
           />
@@ -88,12 +90,7 @@ export default function Register() {
         <div className="my-5">
           <button
             className="py-2 px-6 bg-white hover:bg-sky-400 border rounded mx-auto block text-sky-500 hover:text-white font-semibold disabled:hover:bg-white disabled:hover:text-slate-300 disabled:text-slate-300"
-            disabled={
-              loading ||
-              !inputsValue.name ||
-              !inputsValue.email ||
-              !inputsValue.password
-            }
+            disabled={loading || !name || !email || !password}
           >
             {loading ? "Please Wait.." : "Submit"}
           </button>
