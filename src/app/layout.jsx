@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
           <NavigateProgress />
           <Toaster position="top-center" />
           <Header />
-          <div className="container mx-auto pt-10">{children}</div>
+          <div className="container mx-auto">{children}</div>
         </SessionProvider>
       </body>
     </html>
