@@ -5,8 +5,8 @@ EXPAIRATION = "2h";
 ISSUER = "http://localhost:3000";
 
 // Github Auth Credientials
-GITHUB_ID = "ff70740df321cddbcfc6";
-GITHUB_SECRET = "8355dac4afb9932add22a4a772bda5368141529b";
+GITHUB_ID = "c697ed69a1f62a82920e";
+GITHUB_SECRET = "7bdcd13eabd1e3b6e16dbd87bdf86fe5ce8e8b8f";
 
 // Google Auth Credientials
 GOOGLE_CLIENT_ID =
