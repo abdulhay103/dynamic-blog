@@ -11,8 +11,8 @@ export default function Login() {
   let callBackUrl = params.get("callbackUrl") || "/";
   const [loading, setLoading] = useState(false);
   const [inputsValue, setInputsValue] = useState({
-    email: "",
-    password: "",
+    email: "asha@gmail.com",
+    password: "1234",
   });
   const { email, password } = inputsValue;
 
