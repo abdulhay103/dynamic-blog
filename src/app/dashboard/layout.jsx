@@ -1,10 +1,3 @@
-import AdminHeader from "../components/AdminHeader";
-
-export default function AdminLayout({ children }) {
-  return (
-    <main>
-      <AdminHeader />
-      {children}
-    </main>
-  );
+export default function DashboardLayout({ children }) {
+  return <main className=" pt-10">{children}</main>;
 }
